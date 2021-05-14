@@ -1,0 +1,122 @@
+snipets:-
+rce - class component
+rfce- functional component
+rconst - constructor
+
+
+This file contains the steps to create the react app performed in the tutorial.
+
+Create the react app by typing npx create-react-app <project_name> in the terminal.
+now use cd to open project folder and type npm start to start dev server.
+
+now open app.js file to edit the basic look of the web page.
+
+Components:-
+Create a component folder and a greet file in it. now import react create a function greet and hardcord greet message (use of arrow functions recomended) then you need to export by using export default <function_name> but to get the output you need to import the component.
+
+Class components:-
+create a file import react and {component} from react now create a class which extends component 
+which contains render method that returns null or some html now export it and import it.
+
+usage of types of components:
+
+functional components : as much as possible --> advantage= absence of "this", solution without state, mainly responsible for ui, hooks/dumb/presentational.
+
+class components : advantage--> they have more features, maintain state, complex ui logic, provide lifecycle hooks, stateful/smart/container.
+
+Props Vs. State:-
+Props: Props get passed to the component, they are function parameters, they are immutable, props-functional components and this.props- class components.
+
+State: managed within the component, like props state is the variables declared in the function bpdy, state can e changed, useState Hook- functional components and this.state- class components.
+
+As an example for state we created a new file  a class component message.js then we copied some code from the previoues file now just for the confirmation we included the component in app (till here there no chnage in process it's same as before)
+now as we know that props are immutable so we cannot change the display message from the component so there comes the state.
+first step is to create the state object in the class constructor then call super method now create the state object this.state and assign a property <property_name> now we will bind this in the return statement via this.state.<property_name>, now you need to create another method for the new message say changeMessage() which contains this.setState mehtod with property of new message.for eventHandling create a button which hears the click event via onClick method. pass the arrowfunction to return the changemessage method( to display new message.) in this event handler.
+
+*DO's and Don't in State and setState:-
+    create a component counter.js, now rce "tab" and remove the export from the class name. add text count and add this component in app.
+    create a constructor method and super method in it. create a state object with count property in it say:
+    this.state= {count:0} and bind it with {} in div tag now add a button to increment the counter 
+    1) "and add click event listner,create increment method to increase the count and pass increment method via arrow function and log the result." Here you are changing the state directly.
+
+    2) in the increment method use setState method to increment counter, for loging the value in cosole use the second parameter of setState mehtod instead of logging seperatly because the setState method is async.
+
+    if we call a function multiple times then state reamins the same e.g if we call the increment function four times like in incrementFour function then the output will be 1 as the state is same but if we use the previous state and increment the count from there then we can have 4 instead of 1.
+
+points to ponder :-
+setState:
+Always use setState and never change the state directly.
+if code has to be executed after the state has been updated then place it in call back function which is the second argument to the setState method.
+when you have to update the state based on the prvious state value, pass in a function as an argument instead of the regular object.
+
+Destructuring props and state:-
+ Functional components:-
+ 1) In greet component we can destructure the props as name , heroname in the function parameter then we can use name and heroname instead of props.name and props.heroname. sample code it commented out for reference,
+ 2) you can create a new const variable for name, and heroname and give them the value of props as below.
+ const (name, heroname) = props
+
+ Class components:-
+ 1) there is only one way to destructure the class components extract the props into a new variable as we done in the "destructuring in functional components method 2". sample code is commented out in the hello component.
+
+ Event Handling:-
+ Functional Component:-
+ create a new file say functionClick use rfce to auto generate the basic code for this event handling. create a clickHandler function which simply logs the output in console, now create a button and pass the click handler function into onClick method then import the functionClick into app.js.
+
+Class Component:-
+Almost the process for event handling in class component is same as functional component but instead of clickhandler function we use clickhandler method in class component and pass this.clickhandler to onClick method.
+
+Binding the events:-
+Create a file say eventBind now follow the steps and create a class component then create a constructor using "rconst" in it create a message property. now create another method clickhandler and new message that would be displayed after the click event. now as the atrribute of onClick method pass {this.clickhandler.bind(this)}
+well there are many ways to bind the state so you can use whatever suites you. examples can be found in "eventBind.js"
+1) Use of arrow function in onClick method.
+2) You can bind the state from button.
+3) You can bind state within the constructor.
+4) You can create the clickHandler arrow function form instead of the method form.
+
+Methods as props:-
+
+firstly you need to create a parentComponent in component folder, use rce now use rconst and set the parentName property of this.state as parent.
+create a greet parent method we want to popup an alert window so use arlet tag (use templet literals instead of {}) print hello message into alert window. now bind this in constructor method.
+
+now create another file childComponent, use rfce now add a button to greet parent, now add the childComponent tag in the render method of parentComponent.
+
+now include the parentComponent into render method of app.js. (till now no change will be seen into web page)
+
+add atrribute to childComponent of parentComponent, assign greetparent method to this attribute "greetHandler". now add onClick eventListener in the button and pass props.greetHandler arrow function so thhat you can pass the attributes.
+so this means that we have paased the props from parent to child.
+
+now pass the "child" name in greetHandler in chikd component so now you can access child name from greetParent method in parentComponent.
+
+Conditional Rendering:-
+1) create a new file use rce and return any string and include it in app component(this process is just for the confirmation that our code is errorless). now use rconst create a property "isLoggedIn" as false. now we will use if/else to render conditionally. sample example is commented out.
+
+2) you can create a temp variable message. now using if/else statement define the message variable as guest or member.example is commented
+
+3) use turnary operator inside the return statement.example is commented.(use of this method is recommended as this is a very simple and optimised way to render conditionally.)
+
+4) use the and operator(or short circuit operator).example is commented.(but we should use the method as less as possible because this will display message if it is a member orelse display message will be empty.)
+
+List Rendering:-
+create a file say nameList create functional component now create name list variable now create another variable and assign the map method to it and return it.
+
+e.g.2) create an array for multiple enteries of persons, create a new variable to store the output of map function and return that variable now in the map function use arrow function to itrate over every peson in the list and pass the data as prop to person component which will return the well structured string of data.
+
+Lists and Keys:-
+Keys are the unique identifier. for setting the key you need to pass the kep as any normal prop like <person key = {person.id}/> and it cann't be used in child component for displaying it is only used by the react to keep a track.
+
+well you should avoid using the list index as the key prop as it creates the sever problems so it is recommended that if you have any item like id then use it as key
+
+Sytling and css Basics:-
+create a functional component and css file.
+create a primary class now import tis css file in component, add style in the h1 tag.
+
+Inline styling can be done inside the component lets suppopse we create a variable stye in the top now use camelcasing for the css properties and as the values of property use "" now in the h1 tag assign the style attribute with this variable.
+
+In CSS Modules you need to import styles from the file to use it.e.g import styles from <path_of_file>
+
+Forms or Controlled components:-
+create a file say form now create a class component.
+ 
+now in the form tag create a lable tag for any form element and an inout tag. for example for example create a labl of username and input for the same (here this is still not a controlled component). use rconst and assugn the property username as empty string and in the value attribute of the input assign this state property "username" but you wont be able to input anything in the username as we still didnt created the onchange event.
+
+now add onchange event eventListener to the input tag assign it to the event handler "handleusernamechange". this is a arrow function with parameter event and it retunrs setState method with the property of username assigned to event.taget.value. now you will be able to write in the input filed on the webpage.
